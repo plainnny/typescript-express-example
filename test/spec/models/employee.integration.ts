@@ -51,16 +51,41 @@ describe("[Integration] 게시글 테스트", () => {
     // when
     save(givenReply, (savedReply: Reply) => {
 
+      // then
       expect(savedReply.createId).to.be.eql(givenReply.createId);
       expect(savedReply.boardId).to.be.eql(givenReply.boardId);
       done();
     });
   });
 
+  it('게시글의 리플에 리플을 달면 그 리플의 값이 리턴된다', (done: Function) => {
+    // given
+    const givenReReply = { createId: 2, updateId: 2, content: '대댓글입니다.', boardType: 1, boardId: 1, replyId: 1, status: 1 };
+
+    // when
+    save(givenReReply, (savedReReply: Reply) => {
+
+      // then
+      expect(savedReReply.content).to.be.eql(givenReReply.content);
+      done();
+    });
+  });
+
+  it('1번 게시글을 조회하면 게시글, 댓글, 대댓글을 모두 조회한다', (done: Function) => {
+
+    Board.findOne<Board>({ where: {postId: 1} })
+      .then((board: Board) => {
+        console.log( board );
+        done();
+    });
+
+  });
+
 });
 
 
-describe("[Integration] 직원 모델을 테스트 한다", () => {
+
+describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
 	before((done: Function) => {
 		sequelize.sync().then(() => {
 		  done();
