@@ -10,12 +10,6 @@ export default class Employee extends Model<Employee> {
 	@Column
   address: string;
 
-	@CreatedAt
-	createdAt: Date;
-
-	@UpdatedAt
-  updatedAt: Date;
-
 	@ForeignKey(() => Team)
   @Column
   teamId: number;

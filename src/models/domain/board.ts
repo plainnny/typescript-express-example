@@ -1,4 +1,5 @@
-import {Table, Column, Model, CreatedAt, UpdatedAt, PrimaryKey, AutoIncrement} from 'sequelize-typescript';
+import {AutoIncrement, Column, HasMany, Model, PrimaryKey, Table} from 'sequelize-typescript';
+import Reply from "./reply";
 
 @Table
 export default class Board extends Model<Board> {
@@ -9,30 +10,11 @@ export default class Board extends Model<Board> {
   postId: number;
 
   @Column
-  createId: number;
-
-  @CreatedAt
-  createdAt: Date;
-
-  @Column
-  updateId: number;
-
-  @UpdatedAt
-  updatedAt: Date;
-
-  @Column
-  boardId: number;
-
-  @Column
   title: string;
 
   @Column
   content: string;
 
-  @Column
-  boardType: string;
-
-  @Column
-  status: number;
-
+  @HasMany(() => Reply)
+  replies: Reply[];
 }

@@ -2,90 +2,9 @@ import {expect} from "chai";
 import {sequelize} from "../../../src/models/index";
 import Employee from "../../../src/models/domain/employee";
 import Team from '../../../src/models/domain/team';
-import Board from '../../../src/models/domain/board';
-import Reply from '../../../src/models/domain/Reply';
 
-describe("[Integration] 게시글 테스트", () => {
-  const cleanUp = (cb) => Board.destroy({where: {}, truncate: true}).then(() => cb());
+describe("[Integration] 직원 모델을 테스트 한다", () => {
 
-  before((done: Function) => {
-    sequelize.sync().then(() => {
-      cleanUp(() => done());
-    }).catch((error: Error) => {
-      done(error);
-    });
-  });
-
-/*  beforeEach((done: Function) => {
-    cleanUp(() => done());
-  });*/
-
-  const save = (given, cb) => {
-    const board = new Board(given);
-    board.save()
-      .then((savedBoard: Board) => {
-        cb(savedBoard);
-      });
-  };
-
-  it('게시글을 등록하면 등록한 값이 리턴된다', (done: Function) => {
-
-    // given
-    const givenBoard = { title: 'test', content: 'board test', createId: 1, updateId: 1, boardType: 1 };
-
-    // when
-    save(givenBoard, (savedBoard: Board) => {
-
-      // then
-      expect(savedBoard.title).to.be.eql(givenBoard.title);
-      expect(savedBoard.createId).to.be.eql(givenBoard.createId);
-      done();
-    });
-  });
-
-  it('게시글에 대한 리플을 등록하면 등록 한 값이 리턴된다', (done: Function) => {
-
-    // given
-    const givenReply = { createId: 1, updateId: 1, content: "리플입니다 ㅎㅎㅎ", boardType: 1, boardId: 1 };
-
-    // when
-    save(givenReply, (savedReply: Reply) => {
-
-      // then
-      expect(savedReply.createId).to.be.eql(givenReply.createId);
-      expect(savedReply.boardId).to.be.eql(givenReply.boardId);
-      done();
-    });
-  });
-
-  it('게시글의 리플에 리플을 달면 그 리플의 값이 리턴된다', (done: Function) => {
-    // given
-    const givenReReply = { createId: 2, updateId: 2, content: '대댓글입니다.', boardType: 1, boardId: 1, replyId: 1, status: 1 };
-
-    // when
-    save(givenReReply, (savedReReply: Reply) => {
-
-      // then
-      expect(savedReReply.content).to.be.eql(givenReReply.content);
-      done();
-    });
-  });
-
-  it('1번 게시글을 조회하면 게시글, 댓글, 대댓글을 모두 조회한다', (done: Function) => {
-
-    Board.findOne<Board>({ where: {postId: 1} })
-      .then((board: Board) => {
-        console.log( board );
-        done();
-    });
-
-  });
-
-});
-
-
-
-describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
 	before((done: Function) => {
 		sequelize.sync().then(() => {
 		  done();
@@ -107,8 +26,8 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
         cb(saveEmployee);
       });
   };
-
-	xit('직원을 등록할 때 등록한 값이 리턴된다', (done: Function) => {
+/*
+	it('직원을 등록할 때 등록한 값이 리턴된다', (done: Function) => {
 
 	  // given
 	  let givenEmployee = {name: 'test', address: 'jeju'};
@@ -122,7 +41,7 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	xit('등록한 직원을 조회할 때 조회된다', (done: Function) => {
+	it('등록한 직원을 조회할 때 조회된다', (done: Function) => {
 
     // given
     let givenEmployee = {name: 'test', address: 'jeju'};
@@ -136,7 +55,7 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	xit('rose 라는 직원을 검색하는 경우 rose 직원의 정보가 리턴된다', (done: Function) => {
+	it('rose 라는 직원을 검색하는 경우 rose 직원의 정보가 리턴된다', (done: Function) => {
 
     // given
     let givenEmployee = {name: 'rose', address: 'jeju'};
@@ -151,7 +70,7 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	xit('apple, go 라는 직원 중에 apple 직원을 검색하는 경우 apple 직원의 정보가 리턴된다', (done: Function) => {
+	it('apple, go 라는 직원 중에 apple 직원을 검색하는 경우 apple 직원의 정보가 리턴된다', (done: Function) => {
 
     const apple = {name: 'apple', address: 'jeju'};
     const go = {name: 'go', address: 'jeju'};
@@ -167,7 +86,8 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	xit('it라는 부서에 apple유저를 등록한다', (done: Function) => {
+
+	it('it라는 부서에 apple유저를 등록한다', (done: Function) => {
 
 	  const it_department = new Team({name: 'it'});
 	  const apple = new Employee({name: 'apple', address: 'jeju'});
@@ -183,6 +103,6 @@ describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
           });
         });
       });
-  });
+  }); */
 });
 
