@@ -97,32 +97,13 @@ describe("[Integration] 게시글, 댓글, 대댓글 테스트", () => {
       reply.save().then((savedReply: Reply) => {
         savedBoad.$add('reply', savedReply);
 
-        Board.findAll<Board>({include: [Reply]}).then((boards: Board[]) => {
-          const test_board = boards[0];
-          console.log(test_board.replies);
-          expect( test_board.replies.length ).to.be.eql(1);
+        Board.findOne<Board>({where: { postId: 1 }, include: [Reply]}).then((boards: Board) => {
+          const test_board = boards;
+          console.log(test_board);
+         // expect( test_board.replies.length ).to.be.eql(1);
           done();
         });
       });
     });
-
-
-/*    saveBoard(givenBoard, (savedBoard: Board) => {
-      saveReply(givenReply, (savedReply: Reply) => {
-        saveReply(givenReReply, (savedReReply: Reply) => {
-
-          console.log(savedBoard.createId);
-          console.log(savedReply.createId);
-          console.log(savedReReply.createId);
-
-          Board.findOne<Board>({ where: {postId: 1} })
-            .then((board: Board) => {
-              console.log( board );
-              done();
-            });
-
-        });
-      });
-    });*/
   });
 });
