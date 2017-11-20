@@ -3,7 +3,7 @@ import {sequelize} from "../../../src/models/index";
 import Employee from "../../../src/models/domain/employee";
 import Team from '../../../src/models/domain/team';
 
-describe("[Integration] 직원 모델을 테스트 한다", () => {
+describe.skip("[Integration] 직원 모델을 테스트 한다", () => {
 
 	before((done: Function) => {
 		sequelize.sync().then(() => {
@@ -26,8 +26,8 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
         cb(saveEmployee);
       });
   };
-/*
-	it('직원을 등록할 때 등록한 값이 리턴된다', (done: Function) => {
+
+	xit('직원을 등록할 때 등록한 값이 리턴된다', (done: Function) => {
 
 	  // given
 	  let givenEmployee = {name: 'test', address: 'jeju'};
@@ -41,7 +41,7 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	it('등록한 직원을 조회할 때 조회된다', (done: Function) => {
+	xit('등록한 직원을 조회할 때 조회된다', (done: Function) => {
 
     // given
     let givenEmployee = {name: 'test', address: 'jeju'};
@@ -55,7 +55,7 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	it('rose 라는 직원을 검색하는 경우 rose 직원의 정보가 리턴된다', (done: Function) => {
+	xit('rose 라는 직원을 검색하는 경우 rose 직원의 정보가 리턴된다', (done: Function) => {
 
     // given
     let givenEmployee = {name: 'rose', address: 'jeju'};
@@ -70,7 +70,7 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
     });
   });
 
-	it('apple, go 라는 직원 중에 apple 직원을 검색하는 경우 apple 직원의 정보가 리턴된다', (done: Function) => {
+	xit('apple, go 라는 직원 중에 apple 직원을 검색하는 경우 apple 직원의 정보가 리턴된다', (done: Function) => {
 
     const apple = {name: 'apple', address: 'jeju'};
     const go = {name: 'go', address: 'jeju'};
@@ -87,7 +87,7 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
   });
 
 
-	it('it라는 부서에 apple유저를 등록한다', (done: Function) => {
+	xit('it라는 부서에 apple유저를 등록한다', (done: Function) => {
 
 	  const it_department = new Team({name: 'it'});
 	  const apple = new Employee({name: 'apple', address: 'jeju'});
@@ -103,6 +103,6 @@ describe("[Integration] 직원 모델을 테스트 한다", () => {
           });
         });
       });
-  }); */
+  });
 });
 
